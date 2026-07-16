@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeeAi Studio Workspace</title>
+    
+  <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- External CSS Style Sheet Reference Link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sidebar Control Panel Navigation -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon"></div>
+            <span>CoffeeAi Studio</span>
+        </div>
+        <button class="new-chat-btn" id="newThreadBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            New
+        </button>
+        <div class="history-list">
+            <div class="history-item active">Active Session Engine</div>
+            <div class="history-item" data-preset="status">System Diagnostic</div>
+            <div class="history-item" data-preset="help">Developer Utilities</div>
+        </div>
+    </aside>
+
+    <!-- Main Live Workspace Window Frame -->
+    <main class="chat-container">
+        <header class="chat-header">
+            <div class="agent-info">
+                <div class="status-dot"></div>
+                <span class="agent-name"></span>
+            </div>
+        </header>
+
+        <!-- Message Pipeline Log Window -->
+        <section class="chat-feed" id="chatFeed">
+            <div class="message-group">
+                <div class="message-row bot">
+                    <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="message-bubble">
+                        Welcome to the interactive engine pipeline. Enter text below or trigger standard diagnostic routines directly from the sidebar array.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fixed Text Input Control Footer Panel -->
+        <footer class="chat-footer">
+            <div class="input-wrapper">
+                <input type="text" id="userInput" class="chat-input" placeholder="Ask a question or enter a command...">
+                <button id="sendBtn" class="send-btn">
+                    <!-- <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> -->
+
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- External JavaScript Application Behavior Script Link -->
+    <script src="script.js"></script>
+</body>
+</html>
