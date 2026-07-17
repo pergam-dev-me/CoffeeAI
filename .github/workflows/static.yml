@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: 'https://github.com/pergam-dev-me/CoffeeAI/.github.workflows.git':
+          path: 'CoffeeAI/.github/workflows/stati.yml':
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
