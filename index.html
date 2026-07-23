@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <style>
-          :root {
+ :root {
     --bg-base: #080B11;
     --bg-sidebar: rgba(13, 18, 30, 0.45);
     --border-glow: rgba(6, 182, 212, 0.15);
@@ -388,12 +388,10 @@ body {
     40% { transform: scale(1.1); opacity: 1; }
 }
   </style>
-
-</style>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoffeeAi Studio Workspace</title>
-    
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/QxMcTw1c/1030fa6ff83f52a432278a00d03b7919274e68cf7d898bf5e02fe600428a73af-removebg-preview.png">
   <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -410,13 +408,16 @@ body {
     <aside class="sidebar">
         <div class="brand">
             <div class="brand-icon">
-            <img src="https://i.postimg.cc/s1dDj0SL/file-00000000b14481f4a440303729c2d5d2.png" height="70px" width="70px" style="border-radius: 50px;">
+            <img src="https://i.postimg.cc/QxMcTw1c/1030fa6ff83f52a432278a00d03b7919274e68cf7d898bf5e02fe600428a73af-removebg-preview.png" height="70px" width="70px" style="border-radius: 50px;">
 
             </div>
             <span>CoffeeAi Studio</span>
         </div>
         <button class="new-chat-btn" id="newThreadBtn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12">
+              </line>
+            </svg>
             New
         </button>
         <div class="history-list">
@@ -440,7 +441,7 @@ body {
             <div class="message-group">
                 <div class="message-row bot">
                     <div class="avatar">
-                    <img src="https://i.postimg.cc/s1dDj0SL/file-00000000b14481f4a440303729c2d5d2.png" height="30px" width="30px" style="border-radius: 50px;">
+                    <img src="https://i.postimg.cc/QxMcTw1c/1030fa6ff83f52a432278a00d03b7919274e68cf7d898bf5e02fe600428a73af-removebg-preview.png" height="30px" width="30px" style="border-radius: 50px;">
 
                     </div>
                     <div class="message-bubble">
@@ -457,14 +458,14 @@ body {
                 <button id="sendBtn" class="send-btn">
                     <!-- <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> -->
 
-                  <i class="fa-solid fa-arrow-up"></i>
+                  <i class="fa-solid fa-arrow-up-long"></i>
                 </button>
             </div>
         </footer>
     </main>
 
     <!-- External JavaScript Application Behavior Script Link -->
-<script type="text/javascript">
+<script type="text/JavaScript">
 // Collect and isolate state management DOM target nodes
 document.addEventListener('DOMContentLoaded', () => {
     const chatFeed = document.getElementById('chatFeed');
@@ -623,7 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
+      
 </script>
 </body>
 </html>
