@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
- :root {
+  <style>
+    :root {
     --bg-base: #080B11;
     --bg-sidebar: rgba(13, 18, 30, 0.45);
     --border-glow: rgba(6, 182, 212, 0.15);
@@ -45,6 +45,69 @@ body {
     padding: 1.5rem;
     z-index: 20;
 }
+/* --- Desktop / Landscape Styles --- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.menu-toggle, .close-btn {
+  color: white;
+  display: none; /* Hidden by default on big screens */
+}
+
+.chat-container {
+  margin-left: 260px; /* Leave room for the open sidebar */
+}
+
+/* --- Portrait Mode Styles --- */
+@media (orientation: portrait) {
+  .chat-container {
+    margin-left: 0; /* Chat takes up full screen */
+  }
+
+  .sidebar {
+    transform: translateX(-100%); /* Roll back off-screen */
+    box-shadow: none;
+  }
+
+  /* When this class is added via JS, the sidebar slides into view */
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5); /* Shadow overlay effect */
+  }
+
+  /* Show the toggle buttons in portrait mode */
+  .menu-toggle {
+    display: block;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 999;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .close-btn {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+}
+
 
 .brand {
     display: flex;
@@ -291,17 +354,47 @@ body {
 /* Text Input Control System Design Layout */
 .chat-footer {
     align-self: justify;
-    border-left-width: 100px;
-    padding: 1rem 2.5rem 2.5rem 2.5rem;
+    padding: 1rem 7rem 2.5rem 2.5rem;
     background: linear-gradient(180deg, rgba(8, 11, 17, 0) 0%, var(--bg-base) 70%);
 }
 
+
 .input-wrapper {
-    max-width: 1720px;
-    margin-bottom: 00px;
+  position: fixed; /* Keeps it locked to the bottom */
+  /* left: 10; */
+  bottom: var(--keyboard-height, 0px); /* JS updates this dynamically */
+  transition: bottom 0.1s ease-out; /* Smooth slide up with keyboard */
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+/* Add padding to the bottom of messages so they aren't hidden behind the input */
+.message-row {
+  padding-bottom: calc(80px + var(--keyboard-height, 0px));
+}
+/* 1. Base Styles for Landscape / Desktop View */
+.input-wrapper {
+  width: 90%;                   /* Limits the width so it looks good on wide screens */
+  max-width: 800px;             /* Prevents it from getting too stretched on giant monitors */
+  margin: 0 auto;               /* Centers the 70% input area perfectly on the screen */
+  display: flex;
+  gap: 10px;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+/* 2. Portrait Mode Styles (Mobile / Vertical Screens) */
+@media (orientation: portrait) {
+  .chat-input-area {
+    width: 100% !important;                /* Forces it to take up the full screen width in portrait */
+    max-width: 100% !important;            /* Removes the desktop width limit */
+    padding: 10px;              /* Slightly tighter padding for small screens */
+  }
+}
+
+.input-wrapper {
     transform: translateY(-70px); /* Moves it up by 30px */
-    top: 500px;
-    position: flex;
+    /* top: 550px; */
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(6, 182, 212, 0.2);;
     border-radius: 16px;
@@ -322,11 +415,10 @@ body {
 
 .chat-input {
     flex: 1;
-    width: 600px;
     background: transparent;
     border: none;
     outline: none;
-    color: grey;
+    color: white;
     padding: 0.4rem 0.6rem;
     font-size: 0.95rem;
     line-height: 1.4;
@@ -388,6 +480,8 @@ body {
     40% { transform: scale(1.1); opacity: 1; }
 }
   </style>
+
+  </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoffeeAi Studio Workspace</title>
@@ -403,9 +497,11 @@ body {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <!-- Hamburger Menu Button -->
+    <button class="menu-toggle" aria-label="Open Menu">☰</button>
     <!-- Sidebar Control Panel Navigation -->
     <aside class="sidebar">
+      <button class="close-btn" aria-label="Close Menu">✕</button>
         <div class="brand">
             <div class="brand-icon">
             <img src="https://i.postimg.cc/QxMcTw1c/1030fa6ff83f52a432278a00d03b7919274e68cf7d898bf5e02fe600428a73af-removebg-preview.png" height="70px" width="70px" style="border-radius: 50px;">
@@ -465,7 +561,7 @@ body {
     </main>
 
     <!-- External JavaScript Application Behavior Script Link -->
-<script type="text/JavaScript">
+<script type="text/javascript">
 // Collect and isolate state management DOM target nodes
 document.addEventListener('DOMContentLoaded', () => {
     const chatFeed = document.getElementById('chatFeed');
@@ -540,7 +636,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const group = document.createElement('div');
         group.className = 'message-group';
 
-        const avatarLabel = sender === 'user' ? '👤' : '🤖';
+        const avatarLabel = sender === 'user' ? '👤' : '✨';
         
         // Construct standard structural content row
         const row = document.createElement('div');
@@ -626,5 +722,42 @@ document.addEventListener('DOMContentLoaded', () => {
 });
       
 </script>
+<script type="text/javascript">
+const menuToggle = document.querySelector('.menu-toggle');
+const closeBtn = document.querySelector('.close-btn');
+const sidebar = document.querySelector('.sidebar');
+
+// Slide the sidebar out into view
+menuToggle.addEventListener('click', () => {
+  sidebar.classList.add('open');
+});
+
+// Slide the sidebar back hidden
+closeBtn.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+});      
+</script>
+<script type="text/javascript">
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => {
+    // Calculate how much space the keyboard is occupying
+    const keyboardHeight = window.innerHeight - window.visualViewport.height;
+    
+    // Set the CSS variable dynamically
+    document.documentElement.style.setProperty(
+      '--keyboard-height', 
+      `${Math.max(0, keyboardHeight)}px`
+    );
+    
+    // Auto-scroll to the latest message so the user sees the newest text
+    const chatHistory = document.querySelector('.message-row');
+    if (chatHistory) {
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+  });
+}
+
+</script>
+  
 </body>
 </html>
