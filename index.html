@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-    :root {
+    <style type="text/css">
+          :root {
       --bg-base: #080B11;
       --bg-sidebar: rgba(13, 18, 30, 0.45);
       --border-glow: rgba(6, 182, 212, 0.15);
@@ -293,10 +293,11 @@
   }
   
   .new-chat-btn {
-      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-      border: 1px solid rgba(6, 182, 212, 0.2);
+      /* background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%); */
+      /* border: 1px solid rgba(6, 182, 212, 0.2); */
       color: #FFFFFF;
       padding: 0.8rem 1rem;
+      padding-left: 15px;
       border-radius: 12px;
       cursor: pointer;
       font-weight: 500;
@@ -304,18 +305,43 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 2rem;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       margin-bottom: 1.5rem;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
   
   .new-chat-btn:hover {
-      border-color: var(--brand-primary);
+      /* border-color: var(--brand-primary); */
       box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
       transform: translateY(-1px);
   }
-  
+
+    .dev-options {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+      /* border: 1px solid rgba(6, 182, 212, 0.2); */
+      color: #FFFFFF;
+      padding: 0.8rem 1rem;
+      padding-left: 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+    .dev-options:hover {
+      /* border-color: var(--brand-primary); */
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+      transform: translateY(-1px);
+  }
+
+
   .history-list {
       flex: 1;
       overflow-y: auto;
@@ -489,8 +515,232 @@
     0%, 80%, 100% { transform: scale(0.4); opacity: 0.4; }
     40% { transform: scale(1.1); opacity: 1; }
 }
-</style>
-  
+
+/* Dialog Component Reset */
+.settings-modal {
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+}
+
+/* Modern Backdrop Blur */
+.settings-modal::backdrop {
+  background-color: rgba(10, 15, 26, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+/* Settings Container Box */
+.settings-content {
+  background-color: #121824; 
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  color: #e2e8f0;
+  font-family: sans-serif;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* Structural Header & Body Styling */
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.settings-header h3 { margin: 0; font-size: 1.2rem; }
+
+.close-settings-btn {
+  background: none; border: none; color: #94a3b8;
+  font-size: 1.2rem; cursor: pointer; transition: color 0.2s;
+}
+.close-settings-btn:hover { color: #fff; }
+
+.settings-body { padding: 24px; }
+.setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.setting-info p { margin: 0; font-size: 0.85rem; color: #94a3b8; }
+
+/* Control Components */
+.settings-select {
+  background-color: #1e293b; color: #fff; border: 1px solid #334155;
+  padding: 8px 12px; border-radius: 8px; cursor: pointer;
+}
+
+.switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334155; transition: .3s; border-radius: 24px; }
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+input:checked + .slider { background-color: #0ea5e9; }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* User Profile Container fixed to bottom of sidebar */
+.user-profile-footer {
+  margin-top: auto; /* Pushes the profile container to the very bottom */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-top: 1px solid #1e293b; /* Subtle separator line */
+  background-color: #0f1420; /* Slightly darker than sidebar for depth */
+}
+
+/* Avatar Styling */
+.user-avatar-wrapper {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.user-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #1e293b;
+}
+
+/* Online Status Dot */
+.status-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #0f1420;
+}
+
+.status-indicator.online {
+  background-color: #10b981; /* Vibrant green */
+}
+
+/* Name and Role Text */
+.user-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0; /* Prevents long text from breaking flexbox layouts */
+}
+
+.user-name {
+  color: #f1f5f9;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  color: #64748b;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Logout Button Link */
+.logout-btn {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 1.1rem;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-btn:hover {
+  color: #ef4444; /* Alert red on hover */
+  background-color: rgba(239, 68, 68, 0.1);
+}
+/* Sidebar interactive wrapper additions */
+.user-profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-grow: 1;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  min-width: 0;
+}
+
+.user-profile-trigger:hover {
+  background-color: #1e293b;
+}
+
+/* Modal Inner Structure split style Layout */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  border-bottom: 1px solid #1e293b;
+  min-height: 280px;
+}
+
+/* Vertical Left Navigation Tabs */
+.profile-tabs {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #1e293b;
+  padding: 16px 8px;
+  gap: 8px;
+}
+
+.tab-btn {
+  background: none; border: none; color: #94a3b8;
+  padding: 8px 12px; text-align: left; font-size: 0.9rem;
+  border-radius: 6px; cursor: pointer; transition: all 0.2s;
+}
+
+.tab-btn:hover, .tab-btn.active {
+  color: #fff; background-color: #1e293b;
+}
+
+/* Right Content Display Box */
+.profile-panes { padding: 24px; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* General Details Form Inputs */
+.profile-picture-edit {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+}
+
+.edit-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+.change-photo-btn {
+  background-color: #1e293b; color: #e2e8f0; border: 1px solid #334155;
+  padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;
+}
+.change-photo-btn:hover { background-color: #334155; }
+
+.input-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.input-group label { font-size: 0.85rem; color: #94a3b8; font-weight: 500; }
+
+.profile-input {
+  background-color: #1e293b; color: #fff; border: 1px solid #334155;
+  padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; outline: none;
+}
+.profile-input:focus { border-color: #0ea5e9; }
+
+/* Form Lower Controls Button */
+.profile-footer { padding: 16px 24px; display: flex; justify-content: flex-end; }
+.save-profile-btn {
+  background-color: #0ea5e9; color: #fff; border: none;
+  padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;
+}
+.save-profile-btn:hover { background-color: #0284c7; }
+
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -508,10 +758,14 @@
 </head>
 <body>
     <!-- Hamburger Menu Button -->
-    <button class="menu-toggle" aria-label="Open Menu"><i class="fa-solid fa-grip-lines"></i></button>
+    <button class="menu-toggle" aria-label="Open Menu">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="currentColor" d="M64 384h384v-42.67H64Zm0-106.67h384v-42.66H64ZM64 128v42.67h384V128Z"/></svg>
+    </button>
     <!-- Sidebar Control Panel Navigation -->
     <aside class="sidebar">
-      <button class="close-btn" aria-label="Close Menu"><i class="fa-solid fa-close"></i></button>
+      <button class="close-btn" aria-label="Close Menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="currentColor" d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48m75.31 260.69a16 16 0 1 1-22.62 22.62L256 278.63l-52.69 52.68a16 16 0 0 1-22.62-22.62L233.37 256l-52.68-52.69a16 16 0 0 1 22.62-22.62L256 233.37l52.69-52.68a16 16 0 0 1 22.62 22.62L278.63 256Z"/></svg>
+      </button>
         <div class="brand">
             <div class="brand-icon">
             <img src="https://i.postimg.cc/QxMcTw1c/1030fa6ff83f52a432278a00d03b7919274e68cf7d898bf5e02fe600428a73af-removebg-preview.png" height="70px" width="70px" style="border-radius: 50px;">
@@ -523,7 +777,25 @@
             <div class="history-item active">Current Chat</div>
             <div class="history-item" data-preset="status">System Diagnostics</div>
             <div class="history-item" data-preset="help">Devoloper Utilities</div>
-            
+            <!-- Insert this at the bottom inside your sidebar div -->
+            <div class="user-profile-footer">
+            <!-- Clickable section to open Profile Settings -->
+            <div class="user-profile-trigger" id="openProfileBtn" role="button" tabindex="0">
+              <div class="user-avatar-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="47" height="47" viewBox="0 0 20 20"><path fill="rgba(249,177,233,0.831)" d="M10 20a10 10 0 1 1 0-20a10 10 0 0 1 0 20M7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0m-3.65 8.44a8 8 0 0 0 13.3 0a15.94 15.94 0 0 0-13.3 0"/></svg>
+                <span class="status-indicator online"></span>
+              </div>
+              <div class="user-details">
+                <span class="user-name">Alex Dev</span>
+                <span class="user-role">Developer Account</span>
+              </div>
+            </div>
+          
+            <button class="logout-btn" title="Sign Out" id="logoutBtn">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+          </div>
+  
         </div>
     </aside>
 
@@ -535,10 +807,76 @@
             
             </div>
 
-            <div class="dev-options">
-              <i class="fa-solid fa-gear"></i>
+            <div class="dev-options" id="devOptionsBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 512 512"><path fill="currentColor" d="m487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14c-11.1-35.6-30-67.8-54.7-94.6c-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7c-36.7-8.2-74.3-7.8-109.2 0c-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3c-24.7 26.7-43.6 58.9-54.7 94.6c-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14c11.1 35.6 30 67.8 54.7 94.6c3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7c36.7 8.2 74.3 7.8 109.2 0c5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3c24.7-26.7 43.6-58.9 54.7-94.6c1.5-5.5-.7-11.3-5.6-14.1M256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80s80 35.9 80 80s-35.9 80-80 80"/></svg>
             </div>
+            <dialog class="settings-modal profile-modal" id="profileModal">
+              <div class="settings-content profile-content">
+                
+                <div class="settings-header">
+                  <h3>Account Settings</h3>
+                  <button type="button" class="close-settings-btn" id="closeProfileBtn">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
             
+                <!-- Tab Navigation Grid Layout -->
+                <div class="profile-layout">
+                  <div class="profile-tabs">
+                    <button class="tab-btn active" data-tab="general-tab">General</button>
+                    <button class="tab-btn" data-tab="security-tab">Security</button>
+                  </div>
+            
+                  <div class="profile-panes">
+                    <!-- Tab 1: General Info -->
+                    <!-- Tab 1: General Info -->
+                  <div class="tab-pane active" id="general-tab">
+                    <div class="profile-picture-edit">
+                      <!-- Main Modal Avatar Display -->
+                      <img src="https://i.postimg.cc/d3yDs6Qp/circled-user-icon-user-pro-icon-11553397069rpnu1bqqup.png" alt="Current Avatar" class="edit-avatar" id="modalAvatarPreview">
+                      
+                      <!-- Hidden file input field -->
+                      <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+                      
+                      <!-- Visual trigger button -->
+                      <button type="button" class="change-photo-btn" id="triggerFileInputBtn">Change Avatar</button>
+                    </div>
+                    
+                    <div class="input-group">
+                      <label for="profileName">Display Name</label>
+                      <input type="text" id="profileName" value="Alex Dev" class="profile-input">
+                    </div>
+                    <div class="input-group">
+                      <label for="profileEmail">Email Address</label>
+                      <input type="email" id="profileEmail" value="alex@coffeeai.local" class="profile-input">
+                    </div>
+                  </div>
+            
+                    <!-- Tab 2: Security & Password -->
+                    <div class="tab-pane" id="security-tab">
+                      <div class="input-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" placeholder="••••••••" class="profile-input">
+                      </div>
+                      <div class="input-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Minimum 8 characters" class="profile-input">
+                      </div>
+                      <div class="input-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Repeat new password" class="profile-input">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="profile-footer">
+                  <button class="save-profile-btn" id="saveProfileBtn">Save Changes</button>
+                </div>
+            
+              </div>
+            </dialog>
+
         </header>
 
         <!-- Message Pipeline Log Window -->
@@ -735,7 +1073,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const menuToggle = document.querySelector('.menu-toggle');
 const closeBtn = document.querySelector('.close-btn');
 const sidebar = document.querySelector('.sidebar');
-
+const container = document.querySelector('.chat-container')
 // Slide the sidebar out into view
 menuToggle.addEventListener('click', () => {
   sidebar.classList.add('open');
@@ -744,7 +1082,10 @@ menuToggle.addEventListener('click', () => {
 // Slide the sidebar back hidden
 closeBtn.addEventListener('click', () => {
   sidebar.classList.remove('open');
-});      
+});   
+container.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+});   
 </script>
 <script type="text/javascript">
 if (window.visualViewport) {
@@ -806,6 +1147,182 @@ if (window.visualViewport) {
         });
     }
 </script>
+<script type="text/javascript">
+const settingsBtn = document.getElementById('devOptionsBtn');
+const settingsModal = document.getElementById('profileModal');
+const closeSettingsBtn = document.getElementById('closeSettingsBtn');
 
+// 1. Robust Roll-Back Control (Open/Close actions)
+settingsBtn.addEventListener('click', (e) => {
+  e.preventDefault(); // Stop conflicts with underlying links
+  settingsModal.showModal(); 
+});
+
+closeSettingsBtn.addEventListener('click', () => {
+  settingsModal.close();
+});
+
+// Close when clicking directly on the backdrop area
+settingsModal.addEventListener('click', (e) => {
+  if (e.target === settingsModal) {
+    settingsModal.close();
+  }
+});
+
+
+// 2. Active Application State Changes
+const devModeToggle = document.getElementById('devModeToggle');
+const modelSelect = document.getElementById('modelSelect');
+
+// React immediately when Developer Mode is changed
+devModeToggle.addEventListener('change', (e) => {
+  const isDevModeActive = e.target.checked;
+  console.log(`Developer Mode Updated: ${isDevModeActive}`);
+  
+  // Example UI action: Toggle visibility of your left sidebar utility panel
+  const devUtilitiesMenu = document.querySelector('.dev-options'); // edit selector to match your panel if needed
+  if(devUtilitiesMenu) {
+     // Apply dynamic layout shifts directly here
+  }
+});
+
+// React immediately when Model selection drops down
+modelSelect.addEventListener('change', (e) => {
+  const chosenModel = e.target.value;
+  console.log(`Model switched to: ${chosenModel}`);
+  // Hook up your API pipeline config updates here
+});
+
+</script>
+<script type="text/javascript">
+const openProfileBtn = document.getElementById('openProfileBtn');
+const profileModal = document.getElementById('profileModal');
+const closeProfileBtn = document.getElementById('closeProfileBtn');
+const saveProfileBtn = document.getElementById('saveProfileBtn');
+
+// 1. Control Dialog Visibility Window
+openProfileBtn.addEventListener('click', () => profileModal.showModal());
+closeProfileBtn.addEventListener('click', () => profileModal.close());
+
+profileModal.addEventListener('click', (e) => {
+  if (e.target === profileModal) profileModal.close();
+});
+
+// 2. Tab Sub-Navigation System
+const tabBtns = profileModal.querySelectorAll('.tab-btn');
+const tabPanes = profileModal.querySelectorAll('.tab-pane');
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Clear active states across buttons and tabs
+    tabBtns.forEach(b => b.classList.remove('active'));
+    tabPanes.forEach(p => p.classList.remove('active'));
+
+    // Set new selected visible item target state
+    btn.classList.add('active');
+    const targetTab = btn.getAttribute('data-tab');
+    document.getElementById(targetTab).classList.add('active');
+  });
+});
+
+// 3. Save Modification Changes Interaction Action
+saveProfileBtn.addEventListener('click', () => {
+  const updatedName = document.getElementById('profileName').value;
+  console.log('Sending payload update...', { name: updatedName });
+  
+  // Close up window once visual validation concludes
+  profileModal.close();
+});
+
+</script>
+<script type="text/javascript">
+const triggerFileInputBtn = document.getElementById('triggerFileInputBtn');
+const avatarFileInput = document.getElementById('avatarFileInput');
+const modalAvatarPreview = document.getElementById('modalAvatarPreview');
+
+// Select your sidebar avatar image element
+// If your image element doesn't have an ID, add id="sidebarAvatar" to it in your HTML
+const sidebarAvatar = document.querySelector('.user-avatar'); 
+
+// 1. Direct the styled button click to fire the hidden file picker input
+triggerFileInputBtn.addEventListener('click', () => {
+  avatarFileInput.click();
+});
+
+// 2. Track when a user selects a file
+avatarFileInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  
+  if (file) {
+    // Validate that the uploaded item is actually an image file
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file format (.png, .jpg, .webp)');
+      return;
+    }
+
+    // Generate a temporary local URL for the selected local image file
+    const imageObjectURL = URL.createObjectURL(file);
+
+    // Swap out the visual sources instantly in the UI layer
+    modalAvatarPreview.src = imageObjectURL;
+    if (sidebarAvatar) {
+      sidebarAvatar.src = imageObjectURL;
+    }
+
+    console.log(`New avatar stage preview initialized for: ${file.name}`);
+  }
+});
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  // Simple check for now before triggering real authentication purges
+  if (confirm('Are you sure you want to sign out?')) {
+    console.log('Clearing local session token state...');
+    // window.location.href = '/login.html'; // Redirect step when ready
+  }
+});
+
+</script>
+<script type="text/javascript">
+const saveProfileBtn = document.getElementById('saveProfileBtn');
+
+// Selectors for your bottom sidebar text nodes
+const sidebarName = document.querySelector('.user-name');
+const sidebarRole = document.querySelector('.user-role');
+
+saveProfileBtn.addEventListener('click', (e) => {
+  e.preventDefault(); // Safety stop for button triggers
+
+  // 1. Fetch values from form inputs
+  const inputName = document.getElementById('profileName').value.trim();
+  const inputEmail = document.getElementById('profileEmail').value.trim();
+  
+  // 2. Client-side Form Validation
+  if (!inputName) {
+    alert('Display Name cannot be blank.');
+    return;
+  }
+  if (!inputEmail.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  // 3. Instantly project changes to your Sidebar Interface
+  if (sidebarName) {
+    sidebarName.textContent = inputName;
+  }
+
+  // Optional: Update role if you have an input tracking roles.
+  // Otherwise, it retains your default "Developer Account" string text.
+
+  console.log('Application state successfully saved:', { name: inputName, email: inputEmail });
+
+  // 4. Safely close down the dialog wrapper frame 
+  const profileModal = document.getElementById('profileModal');
+  if (profileModal) {
+    profileModal.close();
+  }
+});
+
+</script>
 </body>
 </html>
