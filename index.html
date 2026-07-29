@@ -21,6 +21,82 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
   }
+
+/* Animated Background */
+
+body{
+    margin:0;
+    overflow:hidden;
+    background:linear-gradient(-45deg,#091428,#0e3d59,#051937,#182848,#0f2027);
+    background-size:400% 400%;
+    animation:gradientMove 3s ease infinite;
+}
+
+/* Moving Gradient */
+
+@keyframes gradientMove{
+    0%{
+        background-position:0% 50%;
+    }
+    50%{
+        background-position:100% 50%;
+    }
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* Floating Glowing Dots */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        radial-gradient(circle,#00ffff55 2px,transparent 3px),
+        radial-gradient(circle,#ffffff22 1px,transparent 2px);
+    background-size:80px 80px,40px 40px;
+    animation:particles 35s linear infinite;
+    opacity:.5;
+}
+
+/* Glow Overlay */
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:radial-gradient(circle at center,
+        rgba(0,255,255,.12),
+        transparent 70%);
+    animation:pulseGlow 3s ease-in-out infinite;
+}
+
+/* Particle Movement */
+
+@keyframes particles{
+    from{
+        transform:translateY(0) rotate(0deg);
+    }
+    to{
+        transform:translateY(-400px) rotate(360deg);
+    }
+}
+
+/* Pulsing Glow */
+
+@keyframes pulseGlow{
+    0%,100%{
+        opacity:.3;
+        transform:scale(1);
+    }
+    50%{
+        opacity:.7;
+        transform:scale(1.15);
+    }
+}
   
   body {
       background-color: var(--bg-base);
