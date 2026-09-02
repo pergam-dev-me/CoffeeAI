@@ -41,17 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Forward payload string elements tracking back to local Flask server route
-            const response = await fetch("https://your-chatbot.onrender.com/chat", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    message: "Hello"
-  })
-})
-.then(response => response.json())
-.then(data => console.log(data.reply));
+            const response = await fetch("/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: text })
+            });
             const data = await response.json();
 
             if (response.ok) {

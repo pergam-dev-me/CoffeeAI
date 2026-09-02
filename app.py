@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify, render_template
 import os
 
-app = Flask(__name__, static_folder='.', template_folder='.')
+app = Flask(__name__, static_folder='.', static_url_path='', template_folder='.')
+# Avoid stale cached assets during development
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 # Fallback basic logic mapping dictionary
 INTENT_RESPONSES = {
